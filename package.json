@@ -1,5 +1,6 @@
 {
   "name": "nextjs-playground",
+  "packageManager": "yarn@4.2.2",
   "version": "0.1.0",
   "private": true,
   "scripts": {
