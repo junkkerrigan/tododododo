@@ -1,11 +1,13 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { db } from "@/src/db";
+import { App } from "@/src/components/App/App";
+import { EssentialsContextProvider } from "@/src/contexts/EssentialsContext";
 
-export default function Home() {
+export default async function Home() {
+  const todos = await db.todo.findMany();
+
   return (
-    <div>
-      <h1>TODODODODO</h1>
-      <button>+</button>
-    </div>
+    <EssentialsContextProvider>
+      <App todos={todos} />
+    </EssentialsContextProvider>
   );
 }

@@ -1,0 +1,28 @@
+.container {
+  margin-top: 20px;
+  border: 3px dashed darkblue;
+  padding: 30px 20px;
+}
+
+.title {
+  margin: 0 0 40px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  align-items: flex-start;
+}
+
+.buttonsContainer {
+  margin-top: 40px;
+}
+
+.createButton {
+  margin-right: 20px;
+}
+
+.input {
+  margin-left: 10px;
+}
