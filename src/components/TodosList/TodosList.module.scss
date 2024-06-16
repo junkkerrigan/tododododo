@@ -18,34 +18,3 @@
   margin-left: 10px;
   font-style: normal;
 }
-
-.item {
-  border: 2px dashed #00b300;
-  padding: 15px;
-  position: relative;
-}
-
-.title {
-  font-size: 24px;
-  color: #4d79ff;
-}
-
-.description {
-  margin: 10px 0 0;
-  font-size: 18px;
-  color: #99b3ff;
-}
-
-.completeButton {
-  width: 30px;
-  height: 30px;
-  background-image: url("/icons/check.png");
-  background-size: 30px 30px;
-  border: none;
-  outline: none;
-  position: absolute;
-  right: 20px;
-  top: 10px;
-  background-color: transparent;
-  cursor: pointer;
-}

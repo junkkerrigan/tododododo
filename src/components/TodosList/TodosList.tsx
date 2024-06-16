@@ -2,6 +2,7 @@ import { Todo } from "@/src/domain";
 import { FC, use } from "react";
 import s from "./TodosList.module.scss";
 import { EssentialsContext } from "@/src/contexts/EssentialsContext";
+import { Item } from "./Item";
 
 type TodosListProps = {
   items: Todo[];
@@ -27,14 +28,11 @@ export const TodosList: FC<TodosListProps> = ({ items, onChange }) => {
         </p>
       )}
       {items.map((item) => (
-        <li key={item.id} className={s.item}>
-          <span className={s.title}>{item.title}</span>
-          <p className={s.description}>{item.description}</p>
-          <button
-            className={s.completeButton}
-            onClick={handleCompleteClick(item)}
-          />
-        </li>
+        <Item
+          key={item.id}
+          item={item}
+          onCompleteClick={handleCompleteClick(item)}
+        />
       ))}
     </ul>
   );

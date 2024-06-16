@@ -1,0 +1,46 @@
+$green: #2eb82e;
+
+.item {
+  border: 2px dashed #00b300;
+  padding: 15px;
+  position: relative;
+}
+
+.title {
+  font-size: 28px;
+  color: #4d79ff;
+}
+
+.description {
+  margin: 10px 0 0;
+  font-size: 20px;
+  color: #99b3ff;
+}
+
+@mixin button($size) {
+  width: $size;
+  height: $size;
+  border: none;
+  outline: none;
+  font-size: calc($size / 1.7);
+  background-color: $green;
+  color: white;
+  border-radius: 20%;
+  cursor: pointer;
+
+  &:hover {
+    font-size: calc($size / 1.9);
+  }
+}
+
+.completeButton {
+  @include button(40px);
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+
+.recordButton {
+  @include button(36px);
+  margin-top: 30px;
+}

@@ -6,3 +6,5 @@ export type Todo = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export const storageNamespaceId = "tododododo";
