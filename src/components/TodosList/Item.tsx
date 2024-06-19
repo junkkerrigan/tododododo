@@ -1,5 +1,12 @@
 import { Todo } from "@/src/domain";
-import { FC, use, useRef } from "react";
+import {
+  ChangeEventHandler,
+  FC,
+  FormEvent,
+  use,
+  useRef,
+  useState,
+} from "react";
 import s from "./Item.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,15 +16,27 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { EssentialsContext } from "@/src/contexts/EssentialsContext";
+import { Input } from "../Input/Input";
 
 type ItemProps = {
   item: Todo;
-  onCompleteClick: (item: Todo) => void;
+  onChange: (update: Partial<Todo>) => Promise<void>;
 };
 
-export const Item: FC<ItemProps> = ({ item, onCompleteClick }) => {
+export const Item: FC<ItemProps> = ({ item, onChange }) => {
   const { audioRecorder } = use(EssentialsContext);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const handleCompleteClick = () => {
+    onChange({ isComplete: true });
+  };
+
+  const handleTitleChange = async (newValue: string) => {
+    onChange({ title: newValue });
+  };
+  const handleDescriptionChange = async (newValue: string) => {
+    onChange({ description: newValue });
+  };
 
   const handleStartRecordingClick = () => {
     audioRecorder.start();
@@ -44,12 +63,21 @@ export const Item: FC<ItemProps> = ({ item, onCompleteClick }) => {
     audioPlayer.play();
   };
 
-  const { title, description } = item;
-
   return (
     <li className={s.item}>
-      <span className={s.title}>{title}</span>
-      <p className={s.description}>{description}</p>
+      <Input
+        value={item.title}
+        required
+        onInputEnd={handleTitleChange}
+        className={s.input}
+      />
+      <Input
+        value={item.description ?? ""}
+        onInputEnd={handleDescriptionChange}
+        as="textarea"
+        className={s.textarea}
+        placeholder="add a description"
+      />
       <div style={{ display: "flex", gap: "10px" }}>
         <button
           className={`${s.button} ${s.recordButton}`}
@@ -70,7 +98,7 @@ export const Item: FC<ItemProps> = ({ item, onCompleteClick }) => {
 
       <button
         className={`${s.button} ${s.completeButton}`}
-        onClick={() => onCompleteClick(item)}
+        onClick={handleCompleteClick}
       >
         <FontAwesomeIcon icon={faCircleCheck} />
       </button>

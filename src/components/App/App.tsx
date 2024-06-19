@@ -24,6 +24,13 @@ export const App: FC<AppProps> = (props) => {
     refreshTodos();
   };
 
+  const handleTodoChange = async (id: string, update: Partial<Todo>) => {
+    const updatedTodo = await todoService.update(id, update);
+
+    const newTodos = todos.map((item) => (item.id === id ? updatedTodo : item));
+    setTodos(newTodos);
+  };
+
   const relevantTodos = todos.filter(({ isComplete }) => !isComplete);
 
   return (
@@ -35,7 +42,7 @@ export const App: FC<AppProps> = (props) => {
         </button>
       </div>
 
-      <TodosList items={relevantTodos} onChange={refreshTodos} />
+      <TodosList items={relevantTodos} onItemChange={handleTodoChange} />
       {isFormOpen && (
         <Form
           onSuccessfulSubmit={handleFormSubmit}

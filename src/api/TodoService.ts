@@ -17,8 +17,7 @@ export class TodoService {
     return todo;
   }
 
-  async update(existingTodo: Todo, update: Partial<Todo>) {
-    const { id } = existingTodo;
+  async update(id: string, update: Partial<Todo>) {
     const body = JSON.stringify({ update });
 
     const response = await fetch(`/api/todos/${id}`, {

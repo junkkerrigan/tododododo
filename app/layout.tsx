@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
-import { Alice as createFont } from "next/font/google";
-import "./globals.css";
 
-const font = createFont({ weight: "400", subsets: ["latin"] });
+import "./globals.css";
+import { font } from "@/src/infra/font";
 
 export const metadata: Metadata = {
   title: "Create Next App",

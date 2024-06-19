@@ -6,17 +6,10 @@ import { Item } from "./Item";
 
 type TodosListProps = {
   items: Todo[];
-  onChange: () => any;
+  onItemChange: (id: string, update: Partial<Todo>) => any;
 };
 
-export const TodosList: FC<TodosListProps> = ({ items, onChange }) => {
-  const { todoService } = use(EssentialsContext);
-
-  const handleCompleteClick = (item: Todo) => async () => {
-    await todoService.update(item, { isComplete: true });
-    onChange();
-  };
-
+export const TodosList: FC<TodosListProps> = ({ items, onItemChange }) => {
   return (
     <ul className={s.list}>
       {items.length === 0 && (
@@ -31,7 +24,7 @@ export const TodosList: FC<TodosListProps> = ({ items, onChange }) => {
         <Item
           key={item.id}
           item={item}
-          onCompleteClick={handleCompleteClick(item)}
+          onChange={(update) => onItemChange(item.id, update)}
         />
       ))}
     </ul>
