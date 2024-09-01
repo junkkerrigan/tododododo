@@ -30,7 +30,6 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
   const handleCompleteClick = () => {
     onChange({ isComplete: true });
   };
-
   const handleTitleChange = async (newValue: string) => {
     onChange({ title: newValue });
   };
@@ -41,7 +40,6 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
   const handleStartRecordingClick = () => {
     audioRecorder.start();
   };
-
   const handleStopRecordingClick = async () => {
     const blob = await audioRecorder.stop();
     const reader = new FileReader();
@@ -53,10 +51,12 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
 
     reader.readAsDataURL(blob);
   };
-
   const play = () => {
     const audioPlayer = audioRef.current!;
     let base64URL = localStorage.getItem(`audio.${item.id}`)!;
+    if (base64URL === null) {
+      console.error(`Audio entry for item.id=${item.id} is not found`);
+    }
 
     audioPlayer.src = base64URL;
     audioPlayer.load();
@@ -78,7 +78,7 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
         className={s.textarea}
         placeholder="add a description"
       />
-      <div style={{ display: "flex", gap: "10px" }}>
+      <div className={s.audioButtonsContainer}>
         <button
           className={`${s.button} ${s.recordButton}`}
           onClick={handleStartRecordingClick}
