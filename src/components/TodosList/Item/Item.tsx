@@ -4,6 +4,7 @@ import {
   FC,
   FormEvent,
   use,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -16,7 +17,12 @@ import {
   faPlay,
 } from "@fortawesome/free-solid-svg-icons";
 import { EssentialsContext } from "@/src/contexts/EssentialsContext";
-import { Input } from "../Input/Input";
+import { Input } from "../../Input/Input";
+import { logError } from "@/src/infra/logError";
+import { AudioRecording } from "../AudioRecording/AudioRecording";
+
+import AudioPlayer from "react-h5-audio-player";
+import "react-h5-audio-player/lib/styles.css";
 
 type ItemProps = {
   item: Todo;
@@ -24,10 +30,16 @@ type ItemProps = {
 };
 
 export const Item: FC<ItemProps> = ({ item, onChange }) => {
-  const { audioRecorder } = use(EssentialsContext);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const storedAudioUrl = localStorage.getItem(`audio.${item.id}`);
+    setAudioUrl(storedAudioUrl);
+  });
+
   const handleCompleteClick = () => {
+    localStorage.removeItem(`audio.${item.id}`);
     onChange({ isComplete: true });
   };
   const handleTitleChange = async (newValue: string) => {
@@ -37,30 +49,15 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
     onChange({ description: newValue });
   };
 
-  const handleStartRecordingClick = () => {
-    audioRecorder.start();
-  };
-  const handleStopRecordingClick = async () => {
-    const blob = await audioRecorder.stop();
+  const handleRecordingFinish = (blob: Blob) => {
     const reader = new FileReader();
-
     reader.onload = (event) => {
       const { result } = event.target as any;
+
+      setAudioUrl(result);
       localStorage.setItem(`audio.${item.id}`, result);
     };
-
     reader.readAsDataURL(blob);
-  };
-  const play = () => {
-    const audioPlayer = audioRef.current!;
-    let base64URL = localStorage.getItem(`audio.${item.id}`)!;
-    if (base64URL === null) {
-      console.error(`Audio entry for item.id=${item.id} is not found`);
-    }
-
-    audioPlayer.src = base64URL;
-    audioPlayer.load();
-    audioPlayer.play();
   };
 
   return (
@@ -78,28 +75,21 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
         className={s.textarea}
         placeholder="add a description"
       />
-      <div className={s.audioButtonsContainer}>
-        <button
-          className={`${s.button} ${s.recordButton}`}
-          onClick={handleStartRecordingClick}
-        >
-          <FontAwesomeIcon icon={faMicrophone} />
-        </button>
-        <button
-          className={`${s.button} ${s.recordButton}`}
-          onClick={handleStopRecordingClick}
-        >
-          <FontAwesomeIcon icon={faStop} />
-        </button>
-        <button className={`${s.button} ${s.recordButton}`} onClick={play}>
-          <FontAwesomeIcon icon={faPlay} />
-        </button>
+
+      <div className={s.audioContainer}>
+        {!audioUrl && <AudioRecording onFinish={handleRecordingFinish} />}
+        {audioUrl && (
+          <div>
+            <AudioPlayer
+              src={audioUrl}
+              showJumpControls={false}
+              header={<h3>Voice note</h3>}
+            />
+          </div>
+        )}
       </div>
 
-      <button
-        className={`${s.button} ${s.completeButton}`}
-        onClick={handleCompleteClick}
-      >
+      <button className={s.completeButton} onClick={handleCompleteClick}>
         <FontAwesomeIcon icon={faCircleCheck} />
       </button>
       <audio ref={audioRef}></audio>

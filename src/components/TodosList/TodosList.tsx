@@ -2,7 +2,7 @@ import { Todo } from "@/src/domain";
 import { FC, use } from "react";
 import s from "./TodosList.module.scss";
 import { EssentialsContext } from "@/src/contexts/EssentialsContext";
-import { Item } from "./Item";
+import { Item } from "./Item/Item";
 
 type TodosListProps = {
   items: Todo[];
