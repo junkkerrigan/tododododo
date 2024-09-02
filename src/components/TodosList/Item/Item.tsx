@@ -77,7 +77,6 @@ export const Item: FC<ItemProps> = ({ item, onChange }) => {
       <button className={s.completeButton} onClick={handleCompleteClick}>
         <FontAwesomeIcon icon={faCircleCheck} />
       </button>
-      <audio ref={audioRef}></audio>
     </li>
   );
 };
