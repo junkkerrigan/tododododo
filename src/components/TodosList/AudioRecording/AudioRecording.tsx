@@ -1,9 +1,4 @@
-import {
-  faMicrophone,
-  faCircleCheck,
-  faStop,
-  faPlay,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMicrophone, faStop } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FC, use, useState } from "react";
 import s from "./AudioRecording.module.scss";

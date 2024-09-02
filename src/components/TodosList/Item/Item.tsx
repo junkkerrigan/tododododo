@@ -1,24 +1,9 @@
 import { Todo } from "@/src/domain";
-import {
-  ChangeEventHandler,
-  FC,
-  FormEvent,
-  use,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import s from "./Item.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faMicrophone,
-  faCircleCheck,
-  faStop,
-  faPlay,
-} from "@fortawesome/free-solid-svg-icons";
-import { EssentialsContext } from "@/src/contexts/EssentialsContext";
+import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { Input } from "../../Input/Input";
-import { logError } from "@/src/infra/logError";
 import { AudioRecording } from "../AudioRecording/AudioRecording";
 
 import AudioPlayer from "react-h5-audio-player";
