@@ -1,5 +1,5 @@
 ## todo 🙂
 
-- store audio blobs in a db
+- store audio in AWS
 - recurring todos
 - drag'n'drop
