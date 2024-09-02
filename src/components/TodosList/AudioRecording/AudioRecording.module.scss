@@ -1,0 +1,11 @@
+@import "../Item//Item.module.scss";
+
+.button {
+  @include button(32px);
+}
+
+.message {
+  font-style: italic;
+  color: gray;
+  margin-right: 10px;
+}
