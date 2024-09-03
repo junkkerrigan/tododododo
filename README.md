@@ -6,6 +6,7 @@ This is my vision of a to-do app.
 ## Installation
 
 ```
+git clone https://github.com/junkkerrigan/tododododo.git
 yarn
 yarn dev
 open localhost:3000
@@ -13,6 +14,6 @@ open localhost:3000
 
 ## To-do 🙂
 
-- store audio in AWS
-- recurring todos
-- drag'n'drop
+- Store audio in AWS
+- Recurring todos
+- Drag'n'drop
