@@ -9,7 +9,6 @@ This is my vision of a to-do app.
 git clone https://github.com/junkkerrigan/tododododo.git
 yarn
 yarn dev
-open localhost:3000
 ```
 
 ## To-do 🙂
