@@ -1,6 +1,6 @@
 ## What is this repository?
 
-I use it to practice developing applications and try out new technologies.
+I use it to improve my developer skills and try out new technologies.\
 This is my vision of a to-do app.
 
 ## Installation
