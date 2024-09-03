@@ -7,7 +7,9 @@ This is my vision of a to-do app.
 
 ```
 git clone https://github.com/junkkerrigan/tododododo.git
+cd tododododo
 yarn
+yarn prisma:init
 yarn dev
 ```
 

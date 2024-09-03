@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "next lint",
     "prisma:migrate": "dotenv -e .env.development -- npx prisma migrate dev",
-    "prisma:init": "prisma generate && yarn run prisma:migrate"
+    "prisma:init": "prisma generate && yarn prisma:migrate"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
