@@ -7,13 +7,16 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prisma:generate": "dotenv -e .env.development -- npx prisma generate",
+    "prisma:migrate": "dotenv -e .env.development -- npx prisma migrate dev"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.5.2",
     "@fortawesome/free-solid-svg-icons": "^6.5.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@prisma/client": "5.15.0",
+    "dotenv-cli": "^7.4.2",
     "next": "14.2.3",
     "prettier": "^3.3.2",
     "react": "^18",
